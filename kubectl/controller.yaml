@@ -5,7 +5,7 @@ metadata:
   labels:
     app: simple-laravel
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     app: simple-laravel
   template:
