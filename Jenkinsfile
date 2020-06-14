@@ -7,7 +7,7 @@ pipeline {
 	stages {
 		stage('Setup Volume Folders') {
 			steps {
-				withCredentials(string(credentialsId: 'kubeconfig', variable: 'kubeconfig')){
+				// withCredentials(string(credentialsId: 'kubeconfig', variable: 'kubeconfig')){
 					sh 'echo "Starting..."'
 					sh 'ls -a'
 					sh 'cp .env.example .env'
@@ -17,7 +17,7 @@ pipeline {
 					sh 'kubectl config view'
 					sh 'cat $HOME/.kube/config'
 					sh 'echo ${kubeconfig}'
-				}
+				// }
 			}
 		}
 		// stage('Build Docker image') {
