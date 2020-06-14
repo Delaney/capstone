@@ -15,7 +15,7 @@ spec:
         app: laravel-green
     spec:
       containers:
-        name: laravel-green
+      - name: laravel-green
         image: ikuku/laravel-green
         imagePullPolicy: Always
         ports:
