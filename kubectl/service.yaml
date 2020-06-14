@@ -1,0 +1,14 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: simple-laravel
+  labels:
+    app: simple-laravel
+spec:
+  ports:
+  - port: 80
+    targetPort: 8888
+  selector:
+    app: simple-laravel
+  type: LoadBalancer

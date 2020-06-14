@@ -1,0 +1,22 @@
+kind: ReplicationController
+apiVersion: v1
+metadata:
+  name: simple-laravel
+  labels:
+    app: simple-laravel
+spec:
+  replicas: 3
+  selector:
+    app: simple-laravel
+  template:
+    metadata:
+      labels:
+        app: simple-laravel
+    spec:
+      containers:
+      - name: simple-laravel
+        image: ikuku/simple-laravel:latest
+        imagePullPolicy: Always
+        ports:
+        - name: http-server
+          containerPort: 8080
