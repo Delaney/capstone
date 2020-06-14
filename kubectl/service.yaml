@@ -3,14 +3,13 @@ kind: Service
 metadata:
   name: nginx-service
 spec:
-  type: ClusterIP
+  type: LoadBalancer
   selector:
     app: nginx
   ports:
     - protocol: TCP
       port: 80
       targetPort: 80
-
 ---
 # kind: Service
 # apiVersion: v1
