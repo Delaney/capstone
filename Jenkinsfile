@@ -1,7 +1,7 @@
 pipeline {
 	environment {
 		registryCredential = 'dockerhub'
-		app = "green"
+		app = "blue"
 	}
 	agent any
 	stages {
