@@ -5,16 +5,16 @@ pipeline {
 	}
 	agent any
 	stages {
-		stage('Setup Volume Folders') {
-			steps {
-				sh 'echo "Starting..."'
-				sh 'ls -a'
-				sh 'cp .env.example .env'
-				sh 'mkdir -p volumes'
-				sh 'mkdir -p volumes/logs'
-				sh 'mkdir -p volumes/app'
-			}
-		}
+		// stage('Setup Volume Folders') {
+		// 	steps {
+		// 		sh 'echo "Starting..."'
+		// 		sh 'ls -a'
+		// 		sh 'cp .env.example .env'
+		// 		sh 'mkdir -p volumes'
+		// 		sh 'mkdir -p volumes/logs'
+		// 		sh 'mkdir -p volumes/app'
+		// 	}
+		// }
 		// stage('Build Docker image') {
 		// 	steps {
 		// 		script {
@@ -22,15 +22,15 @@ pipeline {
 		// 		}
 		// 	}
 		// }
-		stage('Deploy Docker image') {
-			steps {
-				script {
-					docker.withRegistry('', registryCredential) {
-						dockerImage.push()
-					}
-				}
-			}
-		}
+		// stage('Deploy Docker image') {
+		// 	steps {
+		// 		script {
+		// 			docker.withRegistry('', registryCredential) {
+		// 				dockerImage.push()
+		// 			}
+		// 		}
+		// 	}
+		// }
 		stage('Deploy') {
 			steps {
 				sh 'kubectl create -f ./kubectl/controller.yaml'
