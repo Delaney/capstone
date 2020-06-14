@@ -7,35 +7,30 @@ pipeline {
 	stages {
 		stage('Setup Volume Folders') {
 			steps {
-				// withCredentials(string(credentialsId: 'kubeconfig', variable: 'kubeconfig')){
-					sh 'echo "Starting..."'
-					sh 'ls -a'
-					sh 'cp .env.example .env'
-					sh 'mkdir -p volumes'
-					sh 'mkdir -p volumes/logs'
-					sh 'mkdir -p volumes/app'
-					sh 'kubectl config view'
-					sh 'cat $HOME/.kube/config'
-					sh 'echo ${kubeconfig}'
-				// }
+				sh 'echo "Starting..."'
+				sh 'ls -a'
+				sh 'cp .env.example .env'
+				sh 'mkdir -p volumes'
+				sh 'mkdir -p volumes/logs'
+				sh 'mkdir -p volumes/app'
 			}
 		}
-		// stage('Build Docker image') {
-		// 	steps {
-		// 		script {
-		// 			dockerImage = docker.build registry + ":latest"
-		// 		}
-		// 	}
-		// }
-		// stage('Deploy Docker image') {
-		// 	steps {
-		// 		script {
-		// 			docker.withRegistry('', registryCredential) {
-		// 				dockerImage.push()
-		// 			}
-		// 		}
-		// 	}
-		// }
+		stage('Build Docker image') {
+			steps {
+				script {
+					dockerImage = docker.build registry + ":latest"
+				}
+			}
+		}
+		stage('Deploy Docker image') {
+			steps {
+				script {
+					docker.withRegistry('', registryCredential) {
+						dockerImage.push()
+					}
+				}
+			}
+		}
 
 		// stage('Deploy to Cluster') {
 		// 	steps {
@@ -58,16 +53,16 @@ pipeline {
 		// 	}
 		// }
 
-		// stage('Deploy') {
-		// 	steps {
-		// 		// sh 'kubectl apply -f deployment.yaml'
-		// 		sh 'kubectl create -f ./laravel-controller.json'
-		// 		sh 'kubectl describe replicationcontroller/laravel-controller'
-		// 		sh 'kubectl create -f ./laravel-service.json'
-		// 		sh 'kubectl get pods'
-		// 		sh 'kubectl get services'
-		// 	}
-		// }
+		stage('Deploy') {
+			steps {
+				// sh 'kubectl apply -f deployment.yaml'
+				sh 'kubectl create -f ./kubectl/controller.yaml'
+				sh 'kubectl describe replicationcontroller/simple-laravel'
+				sh 'kubectl create -f ./kubectl/service.yaml'
+				sh 'kubectl get pods'
+				sh 'kubectl get services'
+			}
+		}
 
 		// stage('Run Docker') {
 		// 	steps {
