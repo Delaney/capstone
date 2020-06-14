@@ -34,7 +34,6 @@ pipeline {
 		stage('Deploy') {
 			steps {
 				sh 'kubectl create -f ./kubectl/controller.yaml'
-				sh 'kubectl describe replicationcontroller/simple-laravel'
 				sh 'kubectl create -f ./kubectl/service.yaml'
 				sh 'kubectl get pods'
 				sh 'kubectl get services'
