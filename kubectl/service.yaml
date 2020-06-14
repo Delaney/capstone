@@ -1,26 +1,13 @@
-apiVersion: v1
 kind: Service
+apiVersion: v1
 metadata:
-  name: nginx-service
+  name: simple-laravel
+  labels:
+    app: simple-laravel
 spec:
-  type: LoadBalancer
-  selector:
-    app: nginx
   ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
----
-# kind: Service
-# apiVersion: v1
-# metadata:
-#   name: simple-laravel
-#   labels:
-#     app: simple-laravel
-# spec:
-#   ports:
-#   - port: 80
-#     targetPort: 8888
-#   selector:
-#     app: simple-laravel
-#   type: LoadBalancer
+  - port: 8080
+    targetPort: 8080
+  selector:
+    app: simple-laravel
+  type: LoadBalancer
