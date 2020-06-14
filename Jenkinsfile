@@ -33,8 +33,8 @@ pipeline {
 		// }
 		stage('Deploy') {
 			steps {
-				sh 'kubectl create -f ./kubectl/controller.yaml'
-				sh 'kubectl create -f ./kubectl/service.yaml'
+				sh 'kubectl apply -f ./kubectl/controller.yaml'
+				sh 'kubectl apply -f ./kubectl/service.yaml'
 				sh 'kubectl get pods'
 				sh 'kubectl get services'
 			}
