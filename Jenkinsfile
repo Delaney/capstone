@@ -1,8 +1,7 @@
 pipeline {
 	environment {
-		registry = "ikuku/simple-laravel"
 		registryCredential = 'dockerhub'
-		app = blue
+		app = "blue"
 	}
 	agent any
 	stages {
