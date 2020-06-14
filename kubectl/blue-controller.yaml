@@ -15,7 +15,7 @@ spec:
         app: laravel-blue
     spec:
       containers:
-        name: laravel-blue
+      - name: laravel-blue
         image: ikuku/laravel-blue
         imagePullPolicy: Always
         ports:
