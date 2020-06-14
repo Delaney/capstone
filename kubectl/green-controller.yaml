@@ -13,7 +13,7 @@ spec:
     metadata:
       labels:
         app: laravel-green
-    specs:
+    spec:
       containers:
         name: laravel-green
         image: ikuku/laravel-green

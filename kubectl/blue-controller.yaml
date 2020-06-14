@@ -13,7 +13,7 @@ spec:
     metadata:
       labels:
         app: laravel-blue
-    specs:
+    spec:
       containers:
         name: laravel-blue
         image: ikuku/laravel-blue
