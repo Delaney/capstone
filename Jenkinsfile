@@ -35,6 +35,7 @@ pipeline {
 			steps {
 				sh 'kubectl apply -f ./kubectl/controller.yaml'
 				sh 'kubectl apply -f ./kubectl/service.yaml'
+				sh 'sleep 10s'
 				sh 'kubectl get pods'
 				sh 'kubectl get services'
 			}
