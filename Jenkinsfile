@@ -15,13 +15,13 @@ pipeline {
 				sh 'mkdir -p volumes/app'
 			}
 		}
-		stage('Build Docker image') {
-			steps {
-				script {
-					dockerImage = docker.build registry + ":latest"
-				}
-			}
-		}
+		// stage('Build Docker image') {
+		// 	steps {
+		// 		script {
+		// 			dockerImage = docker.build registry + ":latest"
+		// 		}
+		// 	}
+		// }
 		stage('Deploy Docker image') {
 			steps {
 				script {
@@ -31,31 +31,8 @@ pipeline {
 				}
 			}
 		}
-
-		// stage('Deploy to Cluster') {
-		// 	steps {
-		// 		// kubernetesDeploy(
-		// 		// 	kubeconfigId: 'kubeconfig',
-		// 		// 	configs: 'deployment.yaml',
-		// 		// 	enableConfigSubstitution: true
-		// 		// )
-		// 		withCredentials([kubeconfigContent(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
-		// 			sh '''kubectl apply -f deployment.yaml --kubeconfig=${KUBECONFIG}'''
-		// 		}
-		// 	}
-		// }
-		// stage('Deploy') {
-		// 	steps {
-		// 		script {
-		// 			def image_id = registry + ":$BUILD_NUMBER"
-        //            	sh "ansible-playbook  playbook.yml --extra-vars \"image_id=${image_id}\""
-		// 		}
-		// 	}
-		// }
-
 		stage('Deploy') {
 			steps {
-				// sh 'kubectl apply -f deployment.yaml'
 				sh 'kubectl create -f ./kubectl/controller.yaml'
 				sh 'kubectl describe replicationcontroller/simple-laravel'
 				sh 'kubectl create -f ./kubectl/service.yaml'
