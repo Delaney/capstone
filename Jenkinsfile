@@ -1,7 +1,7 @@
 pipeline {
 	environment {
 		registryCredential = 'dockerhub'
-		app = "blue"
+		app = "green"
 	}
 	agent any
 	stages {
@@ -45,7 +45,25 @@ pipeline {
 			steps {
 				sh 'kubectl apply -f ./kubectl/blue-controller.yaml'
 				sh 'kubectl apply -f ./kubectl/green-controller.yaml'
-				sh 'kubectl apply -f ./kubectl/blue-green-service.yaml'
+			}
+		}
+		stage('Switch to Blue App') {
+			when {
+				environment name: 'app', value: 'blue'
+			}
+			steps {
+				sh 'kubectl apply -f ./kubectl/blue-service.yaml'
+				sh 'sleep 10s'
+				sh 'kubectl get pods'
+				sh 'kubectl get services'
+			}
+		}
+		stage('Switch to Green App') {
+			when {
+				environment name: 'app', value: 'green'
+			}
+			steps {
+				sh 'kubectl apply -f ./kubectl/green-service.yaml'
 				sh 'sleep 10s'
 				sh 'kubectl get pods'
 				sh 'kubectl get services'
