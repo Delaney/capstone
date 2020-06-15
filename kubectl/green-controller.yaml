@@ -1,22 +1,22 @@
 apiVersion: v1
 kind: ReplicationController
 metadata:
-  name: laravel-green
+  name: html-green
   labels:
-    app: laravel-green
+    app: html-green
 
 spec:
   replicas: 1
   selector:
-    app: laravel-green
+    app: html-green
   template:
     metadata:
       labels:
-        app: laravel-green
+        app: html-green
     spec:
       containers:
-      - name: laravel-green
-        image: ikuku/laravel-green
+      - name: html-green
+        image: ikuku/html-green
         imagePullPolicy: Always
         ports:
         - name: http-server

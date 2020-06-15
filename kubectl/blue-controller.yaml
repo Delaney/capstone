@@ -1,22 +1,22 @@
 apiVersion: v1
 kind: ReplicationController
 metadata:
-  name: laravel-blue
+  name: html-blue
   labels:
-    app: laravel-blue
+    app: html-blue
 
 spec:
   replicas: 1
   selector:
-    app: laravel-blue
+    app: html-blue
   template:
     metadata:
       labels:
-        app: laravel-blue
+        app: html-blue
     spec:
       containers:
-      - name: laravel-blue
-        image: ikuku/laravel-blue
+      - name: html-blue
+        image: ikuku/html-blue
         imagePullPolicy: Always
         ports:
         - name: http-server

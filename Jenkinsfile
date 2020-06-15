@@ -5,14 +5,9 @@ pipeline {
 	}
 	agent any
 	stages {
-		stage('Setup Volume Folders') {
+		stage('Linting') {
 			steps {
-				sh 'echo "Starting..."'
-				sh 'ls -a'
-				sh 'cp .env.example .env'
-				sh 'mkdir -p volumes'
-				sh 'mkdir -p volumes/logs'
-				sh 'mkdir -p volumes/app'
+				sh 'tidy -q -e *.html'
 			}
 		}
 		stage('Build & Deploy Blue Docker image') {
@@ -21,7 +16,7 @@ pipeline {
 			}
 			steps {
 				script {
-					dockerImage = docker.build "ikuku/laravel-blue" + ":latest"
+					dockerImage = docker.build "ikuku/html-blue" + ":latest"
 					docker.withRegistry('', registryCredential) {
 						dockerImage.push()
 					}
@@ -34,7 +29,7 @@ pipeline {
 			}
 			steps {
 				script {
-					dockerImage = docker.build "ikuku/laravel-green" + ":latest"
+					dockerImage = docker.build "ikuku/html-green" + ":latest"
 					docker.withRegistry('', registryCredential) {
 						dockerImage.push()
 					}
